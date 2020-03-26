@@ -1,8 +1,10 @@
-# .github/workflows/issue-on-push.yml
+name: Auto-issuing.js CI
+
 on: [push]
-name: Create an issue on push
+
 jobs:
-  stuff:
+  auto-create-issue:
+    runs-on: ubuntu-latest
     steps:
       - uses: JasonEtco/create-an-issue@v2
         env:
