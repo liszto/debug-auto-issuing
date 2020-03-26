@@ -1,4 +1,4 @@
-name: Auto-issuing
+name: Auto-issuing.js CI
 
 on:
     schedule:
@@ -8,11 +8,17 @@ on:
 jobs:
   auto-create-issue:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
     steps:
-      # Install Node 12
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          version: 12
-      - run: node .github/actions/auto-create-issue.js
+          node-version: ${{ matrix.node-version }}
+      - run: node .githubactions/auto-create-issue.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
