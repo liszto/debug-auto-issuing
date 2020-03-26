@@ -1,7 +1,7 @@
 name: Auto-issuing.js CI
 
 on: [push]
-
+ 
 jobs:
   auto-create-issue:
     runs-on: ubuntu-latest
