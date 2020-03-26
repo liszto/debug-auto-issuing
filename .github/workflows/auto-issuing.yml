@@ -1,25 +1,9 @@
-name: Auto-issuing.js CI
-
-on:
-    schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '* * * * *'
-
+# .github/workflows/issue-on-push.yml
+on: [push]
+name: Create an issue on push
 jobs:
-  auto-create-issue:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
+  stuff:
     steps:
       - uses: JasonEtco/create-an-issue@v2
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: node .github/actions/auto-create-issue.js
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
