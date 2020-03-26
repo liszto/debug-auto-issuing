@@ -1,0 +1,18 @@
+name: Auto-issuing
+
+on:
+    schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '* * * * *'
+    
+jobs:
+  auto-create-issue:
+    runs-on: ubuntu-latest
+    steps:
+      # Install Node 12
+      - uses: actions/setup-node@v1
+        with:
+          version: 12
+      - run: node .github/actions/auto-create-issue.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
